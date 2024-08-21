@@ -8,39 +8,43 @@ Console.WriteLine("[E]xit");
 
 
 string userType = Console.ReadLine();
-List<string> todos = new List<string>();
+ var todos = new List<string> { "studying Context", "read on the bus", "go to work"};
 
 do
 {
-    
 
-    if (userType == "Aa" || userType == "a")
+    
+    if (userType == "A" || userType == "a")
     {
-        Console.WriteLine("what do you want to add");
-        var addTodos = Console.ReadLine();
-        
+        var newTodo = Console.ReadLine();
+        todos.Add(newTodo);
+        break;
     }
 
-     if (userType == "S" || userType == "s")
+    if (userType == "S" || userType == "s")
     {
-
-        foreach (var i in todos)
+        for (var i=0; i<todos.Count; ++i)
         {
-            Console.WriteLine(i);
+            Console.WriteLine(todos[i]);
+            break;
         }
 
+
     }
 
-     if (userType == "R" || userType == "r")
+    if (userType == "R" || userType == "r")
     {
         //remove a unique todos
         foreach (var i in todos)
         {
             todos.Remove(i);
+            break;
         }
 
     }
 } while (userType != "E" || userType != "e");
+
+Console.ReadKey();
 
 
 
