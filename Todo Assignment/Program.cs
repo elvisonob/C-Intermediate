@@ -10,41 +10,45 @@ Console.WriteLine("[E]xit");
 string userType = Console.ReadLine();
  var todos = new List<string> { "studying Context", "read on the bus", "go to work"};
 
-do
-{
-
-    
-    if (userType == "A" || userType == "a")
+ switch (userType)
     {
-        var newTodo = Console.ReadLine();
-        todos.Add(newTodo);
-        break;
-    }
-
-    if (userType == "S" || userType == "s")
-    {
-        for (var i=0; i<todos.Count; ++i)
-        {
-            Console.WriteLine(todos[i]);
+        case "E":
+        case "e":
+            Console.WriteLine("Exit");
             break;
-        }
 
-
-    }
-
-    if (userType == "R" || userType == "r")
-    {
-        //remove a unique todos
-        foreach (var i in todos)
-        {
-            todos.Remove(i);
+        case "A":
+        case "a":
+            Console.WriteLine("Add a todo");
+            if (userType == "")
+            {
+                Console.WriteLine("User input cannot be empty");
+            }
+            todos.Add(userType);
             break;
-        }
 
+        case "S":
+        case "s":
+            for (var i = 0; i < todos.Count; ++i)
+            {
+                Console.WriteLine(todos[i]);
+            }
+            break;
+
+    case "R":
+    case "r":
+        /*for (var i =0; i<todos.Count; ++i)
+            //return an array without the chosen index
+
+        {
+            todos
+        }*/
+
+        Console.ReadLine(userType);
     }
-} while (userType != "E" || userType != "e");
 
-Console.ReadKey();
+
+    Console.ReadKey();
 
 
 
