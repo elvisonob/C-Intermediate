@@ -10,24 +10,25 @@ Console.WriteLine("[E]xit");
 string userType = Console.ReadLine();
  var todos = new List<string> { "studying Context", "read on the bus", "go to work"};
 
- switch (userType)
+
+    switch (userType)
     {
         case "E":
         case "e":
             Console.WriteLine("Exit");
             break;
 
-        case "A":
-        case "a":
-            Console.WriteLine("Add a todo");
-            if (userType == "")
-            {
-                Console.WriteLine("User input cannot be empty");
-            }
-            todos.Add(userType);
-            break;
+    case "A":
+    case "a":
+        Console.WriteLine("Add a todo");
+        if (userType == "")
+        {
+            Console.WriteLine("User input cannot be empty");
+        }
+        todos.Add(userType);
+        break;
 
-        case "S":
+    case "S":
         case "s":
             for (var i = 0; i < todos.Count; ++i)
             {
@@ -35,20 +36,31 @@ string userType = Console.ReadLine();
             }
             break;
 
-    case "R":
-    case "r":
-        /*for (var i =0; i<todos.Count; ++i)
-            //return an array without the chosen index
+        case "R":
+        case "r":
+            // when a word is typed, and the word is not in the todosList, it should 
+            // trigger, BUT if it is in the todos list, it should be removed
+            Console.WriteLine("Add a todo");
+            for (var i = 0; i < todos.Count; ++i)
+            {
+                if (!userType.Contains(todos[i]))
+                {
+                    Console.WriteLine("We can't remove what does not exist");
+                }
 
-        {
-            todos
-        }*/
+                todos.Remove(todos[i]);
 
-        Console.ReadLine(userType);
+            }
+            break;
+
+    default:
+        Console.WriteLine("Invalid Choice");
+        break;
+
     }
 
-
-    Console.ReadKey();
+    
+ 
 
 
 
