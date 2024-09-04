@@ -64,7 +64,7 @@ while (!shallExit)
                 remove = todos[i];
                 if (!todos.Contains(remove))
                 {
-                    Console.WriteLine("We can't remove what does not exist");
+                    Console.WriteLine("we can't remove what does not exist");
                 }
                 else
                 {
