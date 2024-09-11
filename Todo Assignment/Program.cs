@@ -80,36 +80,42 @@
 //    }
 //}
 
-var numbers = new[] { 10, -8, 2, 12, -17 };
+///lets keep asking the user to enter a number until they give a valid input
 
-List<int> GetPositiveNumbers(int[] numbers)
+
+
+
+
+bool number;
+
+do
 {
-    var result = new List<int>();
+    Console.WriteLine("Enter a number");
+    var userInput = Console.ReadLine();
+    number = int.TryParse(userInput, out int number1);
 
-    foreach(var number in numbers)
+    if (number)
     {
-        if (number > 0)
-        {
-            result.Add(number);
-        }
+        Console.WriteLine("input is a number");
     }
-    return result;
-}
-
-var positiveNumber = GetPositiveNumbers(numbers);
-
-foreach(var number in positiveNumber)
-{
-    Console.WriteLine(number);
-}
-
-Console.ReadKey();
+    else
+    {
+        Console.WriteLine("input is not a number");
+    }
+} while (!number);
 
 
 
 
-    
- 
+
+
+Console.WriteLine(number);
+
+
+
+
+
+
 
 
 
