@@ -30,6 +30,7 @@ while (!shallExit)
         case "R":
         case "r":
             Console.WriteLine("Remove a todo");
+            removeTodo();
             break;
         case "E":
         case "e":
@@ -49,11 +50,11 @@ while (!shallExit)
             Console.WriteLine("No todo has been added yet");
         }
         else
-            foreach (var word in words)
+            for (var i =0; i<words.Count; ++i)
             {
 
                 {
-                    Console.WriteLine(word);
+                Console.WriteLine($"{i + 1}. {words[i]}");
                 }
 
             }
@@ -85,6 +86,31 @@ while (!shallExit)
             }
         }
     };
+
+void removeTodo()
+{
+    // select index of todo to remove and remove it
+    for (var i = 0; i < words.Count; ++i)
+    {
+
+        var userInput = Console.ReadLine();
+
+        if (userInput == "")
+        {
+            Console.WriteLine("Please enter a vaild index");
+            continue;
+        }
+
+        if (int.TryParse(userInput, out int index) && index>=1 && index <=words.Count)
+        {
+
+            words.RemoveAt(index - 1);
+            Console.WriteLine("Todo removed");
+        }
+        
+
+    }
+}
 
 
 
