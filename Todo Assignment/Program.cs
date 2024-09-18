@@ -90,26 +90,37 @@ while (!shallExit)
 void removeTodo()
 {
     // select index of todo to remove and remove it
-    for (var i = 0; i < words.Count; ++i)
+
+    bool isValidIndex = false;
+
+    while (!isValidIndex)
     {
-
-        var userInput = Console.ReadLine();
-
-        if (userInput == "")
-        {
-            Console.WriteLine("Please enter a vaild index");
-            continue;
-        }
-
-        if (int.TryParse(userInput, out int index) && index>=1 && index <=words.Count)
+        for (var i = 0; i < words.Count; ++i)
         {
 
-            words.RemoveAt(index - 1);
-            Console.WriteLine("Todo removed");
-        }
-        
+            var userInput = Console.ReadLine();
 
+            if (userInput == "")
+            {
+                Console.WriteLine("Please enter a vaild index");
+                continue;
+            }
+
+            if (int.TryParse(userInput, out int index) && index >= 1 && index <= words.Count)
+            {
+                isValidIndex = true;
+                words.RemoveAt(index - 1);
+                Console.WriteLine("Todo removed");
+            }
+            else
+            {
+                Console.WriteLine("Please write a valid index");
+            }
+
+
+        }
     }
+    
 }
 
 
