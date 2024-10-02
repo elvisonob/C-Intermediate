@@ -4,6 +4,12 @@ using System.Diagnostics.Tracing;
 
 bool shallExit = false;
 List<string> words = new List<string>();
+
+void descriptionMethod()
+{
+    Console.WriteLine("Please enter a valid description");
+}
+
 while (!shallExit)
 {
     Console.WriteLine("Hello!");
@@ -43,85 +49,96 @@ while (!shallExit)
 }
 
 
-    void seeAllTodos()
+
+void seeAllTodos()
+{
+    if (words.Count == 0)
     {
-        if (words.Count == 0)
-        {
-            Console.WriteLine("No todo has been added yet");
-        }
-        else
-            for (var i =0; i<words.Count; ++i)
-            {
-
-                {
-                Console.WriteLine($"{i + 1}. {words[i]}");
-                }
-
-            }
-
+        Console.WriteLine("No todo has been added yet");
+        return;
     }
 
-    void addATodo()
+    for (var i = 0; i < words.Count; ++i)
     {
-        ///add a userInput to the array list
-        bool isValid = false;
+        Console.WriteLine($"{i + 1}. {words[i]}");
 
-        while (!isValid)
+    }
+}
+
+void addATodo()
+{
+    ///add a userInput to the array list
+    string description;
+
+    do
+
+    {
+        Console.WriteLine("Enter A description");
+        description = Console.ReadLine();
+
+
+        if (isDescriptionValid(description))
         {
-            Console.WriteLine("Enter a description");
-            var description = Console.ReadLine();
 
-            if (description == "")
-            {
-                Console.WriteLine("Please enter a valid description");
-            }
-            else if (words.Contains(description))
-            {
-                Console.WriteLine("Todo must be unique");
-            }
-            else
-            {
-                isValid = true;
-                words.Add(description);
-            }
+            words.Add(description);
         }
+
+    } while (!isDescriptionValid(description));
+
+
+
+
+    bool isDescriptionValid(string description)
+    {
+        if (description == "")
+        {
+            descriptionMethod();
+            return false;
+        }
+        else if (words.Contains(description))
+        {
+            Console.WriteLine("Todo must be unique");
+            return false;
+        }
+        return true;
     };
 
-void removeTodo()
-{
-    // select index of todo to remove and remove it
 
-    bool isValidIndex = false;
-
-    while (!isValidIndex)
+    void removeTodo()
     {
-        for (var i = 0; i < words.Count; ++i)
+        // select index of todo to remove and remove it
+
+        bool isValidIndex = false;
+
+        while (!isValidIndex)
         {
-
-            var userInput = Console.ReadLine();
-
-            if (userInput == "")
+            for (var i = 0; i < words.Count; ++i)
             {
-                Console.WriteLine("Please enter a vaild index");
-                continue;
-            }
 
-            if (int.TryParse(userInput, out int index) && index >= 1 && index <= words.Count)
-            {
-                isValidIndex = true;
-                words.RemoveAt(index - 1);
-                Console.WriteLine("Todo removed");
-            }
-            else
-            {
-                Console.WriteLine("Please write a valid index");
-            }
+                var userInput = Console.ReadLine();
+
+                if (userInput == "")
+                {
+                    descriptionMethod();
+                    continue;
+                }
+
+                if (int.TryParse(userInput, out int index) && index >= 1 && index <= words.Count)
+                {
+                    isValidIndex = true;
+                    words.RemoveAt(index - 1);
+                    Console.WriteLine("Todo removed");
+                }
+                else
+                {
+                    Console.WriteLine("Please write a valid index");
+                }
 
 
+            }
         }
+
     }
-    
-}
 
 
 
