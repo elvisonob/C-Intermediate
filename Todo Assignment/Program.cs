@@ -1,45 +1,36 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.ComponentModel.Design;
 
-using System.Diagnostics.Tracing;
 
-var numbers1 = new[] { 5, 10, 15, 20, -8, -2, -30};
 
- List<int> onlyPositive(int[] numbers, out int countPositiveNumbers){
-    countPositiveNumbers = 0;
-    var result = new List<int>();
-    // bring out all the negative numbers and get the total count of the positive
-    foreach(int number in numbers){
-        if (number > 0)
-        {
-            result.Add(number);
-        } else
-        {
-            countPositiveNumbers++;
-        }
-    }
-    return result;
-};
+//check the user input and return true if it is a number and return false when not a number
 
-int positive;
+// ask the user to keep writing a number until they give a valid input
 
-var tentativeResult = onlyPositive(numbers1, out positive);
+// so, if number is negative, user should keep making inputs until there is a positive.
 
-Console.WriteLine(positive);
-foreach(var number in tentativeResult)
+bool isParsingSuccessful;
+do
 {
-    Console.WriteLine(number);
- 
-}
+    Console.WriteLine("Enter a number:");
+    var userInput = Console.ReadLine();
+    isParsingSuccessful = int.TryParse(userInput, out int number);
+
+    if (isParsingSuccessful)
+    {
+        Console.WriteLine("Number is valid " + number);
+    }
+    else
+    {
+        Console.WriteLine("Number is not valid");
+    }
+
+
+} while (!isParsingSuccessful);
 
 
 
 
-
-
-
-
-
-
+Console.ReadKey();
 
 
 
