@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 string userInput;
 
-List<string> todoList = new List<string>(){};
+List<string> todoList = new List<string>() { };
 
 do
 {
@@ -16,7 +16,7 @@ do
     Console.WriteLine("[E]xit");
 
     userInput = Console.ReadLine();
-    
+
 
 
     // if an option that is not S, A, R, is selected, the user should be told that it is an incorrect choice
@@ -31,7 +31,7 @@ do
         case "A":
         case "a":
             Console.WriteLine("Add a Todo");
-            
+
             addATodo();
             break;
         case "R":
@@ -46,12 +46,13 @@ do
         default:
             Console.WriteLine("Invalid Input");
             break;
-    } 
+    }
 } while (userInput != "E");
 
 //Writing a method for add a todo, it includes the userInput to the List array
 
-void addATodo(){
+void addATodo()
+{
     //if case A is selected, the user Input should be collected afterwards and added to list
     var newInput = Console.ReadLine();
     todoList.Add(newInput);
@@ -61,64 +62,99 @@ void seeAllTodos()
 {
     for (int i = 0; i < todoList.Count; ++i)
     {
-        Console.WriteLine($"{i + 1}: " + todoList[i] );
+        Console.WriteLine($"{i + 1}: " + todoList[i]);
     }
 }
 
 
-/* When pressed "R"
-
-if no todos, then say no todos have been added yet else showTodos
-
-
-we will select the index we want to remove.
-
- If index is wrong or non existent, we will say index does not exist
-
-Then list of all Todos shall be printed like the See all todos
+//void removeATodo()
+//{
 
 
+//    if (todoList.Count == 0)
+//    {
+//        Console.WriteLine("no todos have been added yet");
+//    }
+//    else
+//    {
+//        seeAllTodos();
+//        Console.WriteLine("Select Todos to remove");
 
-when index that exist is selected, the todo should be removed instantly
+//    }
 
-then we have TODO removed:[Description] with description of the todo that has just been removed
+//    var indexNum = Console.ReadLine();
 
-Then the application should print again 'What do you want todo' with all available options */
+//    bool isNumber;
+//    do
+//    {
+//        for (int i = 0; i < todoList.Count; ++i)
+//        {
+//            isNumber = int.TryParse(indexNum, out int number);
+//            if (isNumber)
+//            {
+//                var newNumber = number - 1;
 
-void removeATodo(){
-    
+//                todoList.Remove(todoList[newNumber]);
+//                Console.WriteLine("Todo Removed:" + todoList[newNumber]);
+
+
+//            }
+//            else
+//            {
+//                Console.WriteLine("It exceeds our range");
+//            }
+
+
+//        } 
+//    } while (!isNumber);
+//};
+
+
+void removeATodo()
+{
+    // Declare the isNumber variable
+    bool isNumber = false;
 
     if (todoList.Count == 0)
     {
-        Console.WriteLine("no todos have been added yet");
-    }else
-    {
-        seeAllTodos();
-        Console.WriteLine("Select Todos to remove");
-        
+        Console.WriteLine("No todos have been added yet");
+        return;
     }
 
-    var indexNum = Console.ReadLine();
-    bool isNumber = int.TryParse(indexNum, out int number);
-    for (int i= 0; i < todoList.Count; ++i){
+    seeAllTodos();  // Assuming this function shows all todo items
+    Console.WriteLine("Select a Todo to remove (enter the number)");
 
-        // if the number is more than 0 and it matches with the number in the todolist, remove that number
+    // Loop until a valid input is given
+    do
+    {
+        var indexNum = Console.ReadLine();  // Read user input
+        isNumber = int.TryParse(indexNum, out int number);  // Try to parse input as number
+
         if (isNumber)
         {
-            //whatever number the user type, i should add plus 1
-            var newNumber = number - 1;
-            
-                todoList.Remove(todoList[newNumber]);
-            
+            // Check if the input number is within the valid range
+            if (number >= 1 && number <= todoList.Count)
+            {
+                var newNumber = number - 1;  // Adjust for zero-based index
+
+                // Store the todo before removing it, so you can display it
+                var removedTodo = todoList[newNumber];
+
+                todoList.RemoveAt(newNumber);  // Remove the item at the index
+                Console.WriteLine("Todo Removed: " + removedTodo);
+                break;  // Exit the loop after successful removal
+            }
+            else
+            {
+                Console.WriteLine("Invalid number. Please enter a valid number from the list.");
+                isNumber = false;  // Force the loop to continue
+            }
         }
         else
         {
-            
-            Console.WriteLine("That is not a right index number");
-
+            Console.WriteLine("Invalid input. Please enter a number.");
         }
-          
-    }
+    } while (!isNumber);  // Loop until a valid number is entered
 }
 
 
