@@ -103,7 +103,7 @@ void removeATodo()
 
                 todoList.RemoveAt(newNumber);
 
-                Console.WriteLine("TodoRemoved:" + removedTodo);
+                Console.WriteLine("TodoRemoved: " + removedTodo);
 
 
             }
